@@ -14,6 +14,7 @@ export function RankingPage() {
 					<thead>
 						<tr>
 							<th>#</th>
+							<th>Jugador</th>
 							<th>Puntaje</th>
 							<th>Palabras</th>
 							<th>Fecha</th>
@@ -23,6 +24,7 @@ export function RankingPage() {
 						{scores.map((item, idx) => (
 							<tr key={item.id}>
 								<td>{idx + 1}</td>
+								<td>{item.playerName || 'Anónimo'}</td>
 								<td>
 									<strong>{item.score} pts</strong>
 								</td>
