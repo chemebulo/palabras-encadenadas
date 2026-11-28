@@ -70,25 +70,80 @@
 	color: var(--accent);
 }
 
-.word-form {
+.word-tiles-form {
 	display: flex;
-	gap: 0.75rem;
-	margin-bottom: 1.5rem;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1.75rem;
 }
 
-.word-input {
-	flex: 1;
-	padding: 0.85rem 1rem;
-	font-size: 1rem;
-	border-radius: 8px;
-	border: 1px solid var(--border);
+.tiles-board {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: clamp(0.25rem, 1.2vw, 0.5rem);
+	width: 100%;
+	min-height: 76px;
+	padding: 0.75rem;
 	background: var(--surface);
-	color: var(--text);
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	cursor: text;
+	transition: border-color 0.15s ease;
 }
 
-.word-input:focus {
-	outline: 2px solid var(--accent);
-	border-color: transparent;
+.tiles-board:focus-within {
+	border-color: var(--accent);
+}
+
+.hidden-word-input {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: text;
+}
+
+.letter-tile {
+	flex: 0 1 56px;
+	aspect-ratio: 1 / 1;
+	min-width: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 800;
+	font-size: clamp(0.95rem, 3.8vw, 1.75rem);
+	border-radius: clamp(6px, 1.5vw, 12px);
+	user-select: none;
+	animation: tilePop 0.12s ease-out;
+}
+
+.tile-filled {
+	background-color: #22c55e;
+	color: #ffffff;
+	box-shadow: 0 3px 0 #15803d;
+}
+
+.tile-hint {
+	background-color: transparent;
+	border: 2px dashed var(--border);
+	color: var(--muted);
+}
+
+.tiles-actions {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	gap: 0.75rem;
+}
+
+.tiles-hint-text {
+	font-size: 0.85rem;
+	color: var(--muted);
 }
 
 .btn-primary {
@@ -223,13 +278,21 @@
 	border-bottom: 1px solid var(--border);
 }
 
+@keyframes tilePop {
+	0% {
+		transform: scale(0.85);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
 @media (max-width: 600px) {
-	.stats-grid {
-		grid-template-columns: repeat(2, 1fr);
+	.tiles-actions {
+		flex-direction: column;
 	}
 
-	.word-form,
-	.save-score-form {
-		flex-direction: column;
+	.tiles-actions .btn-primary {
+		width: 100%;
 	}
 }
