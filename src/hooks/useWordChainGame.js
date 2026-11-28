@@ -12,7 +12,10 @@ export function useWordChainGame() {
 	const [isValidating, setIsValidating] = useState(false);
 
 	const statusRef = useRef(status);
-	statusRef.current = status;
+
+	useEffect(() => {
+		statusRef.current = status;
+	}, [status]);
 
 	const score = words.reduce((total, word) => total + word.length, 0);
 	const lastWord = words[words.length - 1] || null;
